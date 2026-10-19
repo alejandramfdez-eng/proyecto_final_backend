@@ -32,9 +32,9 @@ def insert_data(data):
 
     conexionInsert.con.close()
 
-def update_data(id, data):
+def update_data(id_movies: str, data):
     try:
-        conexionUpdate = Conexion("UPDATE record SET id_movies = ?, title = ?, year = ?, gender = ? WHERE id = ?", data + [id])
+        conexionUpdate = Conexion("UPDATE record SET id_movies = ?, title = ?, year = ?, gender = ? WHERE id_movies = ?", data + [id_movies])
         conexionUpdate.res
         conexionUpdate.con.commit()
     except sqlite3.Error as error:
@@ -42,9 +42,9 @@ def update_data(id, data):
 
     conexionUpdate.con.close()
 
-def delete_data(id:int):
+def delete_data(id_movies: str):
     try:
-        conexionDelete = Conexion("DELETE FROM record WHERE id = ?", [id])
+        conexionDelete = Conexion("DELETE FROM record WHERE id_movies = ?", [id_movies])
         conexionDelete.res
         conexionDelete.con.commit()
     except sqlite3.Error as error:

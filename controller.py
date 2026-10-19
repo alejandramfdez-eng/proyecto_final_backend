@@ -47,19 +47,19 @@ def insert_movie(body: Movie):
         print(ex)
         return {"error": 'Error inserting movie'}
 
-@app.put("/movies/{id}", tags=["movies"])
-def update_movie(id: int, body: Movie):
+@app.put("/movies/{id_movies}", tags=["movies"])
+def update_movie(id_movies: str, body: Movie):
     try:
-        update_data(id, (body.id_movies, body.title, body.date, body.gender))
+        update_data(id_movies, (body.id_movies, body.title, body.date, body.gender))
         return {"message": "Movie updated successfully"}
     except Exception as ex:
         print(ex)
         return {"error": 'Error updating movie'}
     
 @app.delete("/movies/{id}", tags=["movies"])
-def delete_movie(id: int):
+def delete_movie(id_movies: str):
     try:
-        delete_data(id)
+        delete_data(id_movies)
         return {"message": "Movie deleted successfully"}
     except Exception as ex:
         print(ex)
