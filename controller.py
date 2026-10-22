@@ -15,12 +15,6 @@ app.add_middleware(
 
 omdb_api_key = "ca48e3ef"
 
-class Movie(BaseModel):
-    id_movies: str
-    title: str
-    date: str
-    gender: str
-
 class Qualification(BaseModel):
     id_movies: str
     person: str
@@ -32,38 +26,6 @@ class Comment(BaseModel):
     person: str
     comment: str
     date: str
-
-#historial de peliculas
-@app.get("/movies", tags=["movies"])
-def index():
-    return select_all_history()
-
-@app.post("/movies", tags=["movies"])
-def insert_movie(body: Movie):
-    try:
-        insert_data((body.id_movies, body.title, body.date, body.gender))
-        return {"message": "Movie inserted successfully"}
-    except Exception as ex:
-        print(ex)
-        return {"error": 'Error inserting movie'}
-
-@app.put("/movies/{id_movies}", tags=["movies"])
-def update_movie(id_movies: str, body: Movie):
-    try:
-        update_data(id_movies, (body.id_movies, body.title, body.date, body.gender))
-        return {"message": "Movie updated successfully"}
-    except Exception as ex:
-        print(ex)
-        return {"error": 'Error updating movie'}
-    
-@app.delete("/movies/{id}", tags=["movies"])
-def delete_movie(id_movies: str):
-    try:
-        delete_data(id_movies)
-        return {"message": "Movie deleted successfully"}
-    except Exception as ex:
-        print(ex)
-        return {"error": 'Error deleting movie'}
 
 #conexion con la api de omdb
 @app.get("/movies/search", tags=["OMDB API"])
